@@ -1,5 +1,5 @@
-declare module "prism-react-renderer" {
-  import * as React from "react";
+declare module '@rockchalkwushock/prism-react-renderer' {
+  import * as React from 'react'
 
   type Language =
     | 'bash'
@@ -26,148 +26,148 @@ declare module "prism-react-renderer" {
     | 'yaml'
 
   type PrismGrammar = {
-    [key: string]: any;
-  };
+    [key: string]: any
+  }
 
-  type LanguageDict = { [lang in Language]: PrismGrammar };
+  type LanguageDict = { [lang in Language]: PrismGrammar }
 
   type PrismLib = {
-    languages: LanguageDict;
+    languages: LanguageDict
     tokenize: (
       code: string,
       grammar: PrismGrammar,
       language: Language
-    ) => PrismToken[] | string[];
+    ) => PrismToken[] | string[]
     highlight: (
       code: string,
       grammar: PrismGrammar,
       language: Language
-    ) => string;
-  };
+    ) => string
+  }
 
   type PrismThemeEntry = {
-    color?: string;
-    backgroundColor?: string;
-    fontStyle?: "normal" | "italic";
+    color?: string
+    backgroundColor?: string
+    fontStyle?: 'normal' | 'italic'
     fontWeight?:
-      | "normal"
-      | "bold"
-      | "100"
-      | "200"
-      | "300"
-      | "400"
-      | "500"
-      | "600"
-      | "700"
-      | "800"
-      | "900";
+      | 'normal'
+      | 'bold'
+      | '100'
+      | '200'
+      | '300'
+      | '400'
+      | '500'
+      | '600'
+      | '700'
+      | '800'
+      | '900'
     textDecorationLine?:
-      | "none"
-      | "underline"
-      | "line-through"
-      | "underline line-through";
-    opacity?: number;
-    [styleKey: string]: string | number | void;
-  };
+      | 'none'
+      | 'underline'
+      | 'line-through'
+      | 'underline line-through'
+    opacity?: number
+    [styleKey: string]: string | number | void
+  }
 
   type PrismTheme = {
-    plain: PrismThemeEntry;
+    plain: PrismThemeEntry
     styles: Array<{
-      types: string[];
-      style: PrismThemeEntry;
-      languages?: Language[];
-    }>;
-  };
+      types: string[]
+      style: PrismThemeEntry
+      languages?: Language[]
+    }>
+  }
 
   type ThemeDict = {
-    root: StyleObj;
-    plain: StyleObj;
-    [type: string]: StyleObj;
-  };
+    root: StyleObj
+    plain: StyleObj
+    [type: string]: StyleObj
+  }
 
   type Token = {
-    types: string[];
-    content: string;
-    empty?: boolean;
-  };
+    types: string[]
+    content: string
+    empty?: boolean
+  }
 
   type PrismToken = {
-    type: string;
-    content: Array<PrismToken | string> | string;
-  };
+    type: string
+    content: Array<PrismToken | string> | string
+  }
 
   type StyleObj = {
-    [key: string]: string | number | null;
-  };
+    [key: string]: string | number | null
+  }
 
   type LineInputProps = {
-    key?: React.Key;
-    style?: StyleObj;
-    className?: string;
-    line: Token[];
-    [otherProp: string]: any;
-  };
+    key?: React.Key
+    style?: StyleObj
+    className?: string
+    line: Token[]
+    [otherProp: string]: any
+  }
 
   type LineOutputProps = {
-    key?: React.Key;
-    style?: StyleObj;
-    className: string;
-    [otherProps: string]: any;
-  };
+    key?: React.Key
+    style?: StyleObj
+    className: string
+    [otherProps: string]: any
+  }
 
   type TokenInputProps = {
-    key?: React.Key;
-    style?: StyleObj;
-    className?: string;
-    token: Token;
-    [otherProp: string]: any;
-  };
+    key?: React.Key
+    style?: StyleObj
+    className?: string
+    token: Token
+    [otherProp: string]: any
+  }
 
   type TokenOutputProps = {
-    key?: React.Key;
-    style?: StyleObj;
-    className: string;
-    children: string;
-    [otherProp: string]: any;
-  };
+    key?: React.Key
+    style?: StyleObj
+    className: string
+    children: string
+    [otherProp: string]: any
+  }
 
   type RenderProps = {
-    tokens: Token[][];
-    className: string;
-    style: StyleObj;
-    getLineProps: (input: LineInputProps) => LineOutputProps;
-    getTokenProps: (input: TokenInputProps) => TokenOutputProps;
-  };
+    tokens: Token[][]
+    className: string
+    style: StyleObj
+    getLineProps: (input: LineInputProps) => LineOutputProps
+    getTokenProps: (input: TokenInputProps) => TokenOutputProps
+  }
 
   type DefaultProps = {
-    Prism: PrismLib;
-    theme: PrismTheme;
-  };
+    Prism: PrismLib
+    theme: PrismTheme
+  }
 
   interface HighlightProps {
-    Prism: PrismLib;
-    theme?: PrismTheme;
-    language: Language;
-    code: string;
-    children: (props: RenderProps) => React.ReactNode;
+    Prism: PrismLib
+    theme?: PrismTheme
+    language: Language
+    code: string
+    children: (props: RenderProps) => React.ReactNode
   }
 
   export default class Highlight extends React.Component<HighlightProps> {
-    themeDict: ThemeDict;
-    getLineProps: (lineInputProps: LineInputProps) => LineOutputProps;
-    getStyleForToken: (token: Token) => { [inlineStyle: string]: string };
-    getTokenProps: (tokenInputPropsL: TokenInputProps) => TokenOutputProps;
+    themeDict: ThemeDict
+    getLineProps: (lineInputProps: LineInputProps) => LineOutputProps
+    getStyleForToken: (token: Token) => { [inlineStyle: string]: string }
+    getTokenProps: (tokenInputPropsL: TokenInputProps) => TokenOutputProps
   }
 
-  export const defaultProps: DefaultProps;
+  export const defaultProps: DefaultProps
 
-  export const Prism: PrismLib;
+  export const Prism: PrismLib
 
-  export { Language, DefaultProps, PrismTheme };
+  export { Language, DefaultProps, PrismTheme }
 }
 
-declare module "prism-react-renderer/themes/*" {
-  import { PrismTheme } from "prism-react-renderer";
-  const theme: PrismTheme;
-  export default theme;
+declare module 'prism-react-renderer/themes/*' {
+  import { PrismTheme } from 'prism-react-renderer'
+  const theme: PrismTheme
+  export default theme
 }
