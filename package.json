@@ -1,13 +1,13 @@
 {
-  "name": "prism-react-renderer",
-  "version": "1.2.0",
-  "description": "Renders highlighted Prism output using React",
+  "name": "@rockchalkwushock/prism-react-renderer",
+  "version": "0.1.0",
+  "description": "My fork of prism-react-renderer",
   "sideEffects": false,
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
   "types": "index.d.ts",
   "license": "MIT",
-  "repository": "https://github.com/FormidableLabs/prism-react-renderer",
+  "repository": "https://github.com/rockchalkwushock/prism-react-renderer",
   "files": [
     "index.d.ts",
     "dist",

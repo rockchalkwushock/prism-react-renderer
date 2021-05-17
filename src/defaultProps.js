@@ -1,7 +1,7 @@
 // @flow
 
 import Prism from "./vendor/prism";
-import theme from "./themes/duotoneDark";
+import theme from "./themes/nightOwl";
 
 import type { PrismLib } from "./types";
 
