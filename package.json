@@ -1,6 +1,6 @@
 {
   "name": "@rockchalkwushock/prism-react-renderer",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "My fork of prism-react-renderer",
   "sideEffects": false,
   "main": "dist/index.cjs.js",
