@@ -1,13 +1,13 @@
-import * as globby from 'globby';
-import * as path from 'path';
-import * as fs from 'fs';
+import * as globby from 'globby'
+import * as path from 'path'
+import * as fs from 'fs'
 
-import commonjs from '@rollup/plugin-commonjs';
-import resolve from '@rollup/plugin-node-resolve';
-import buble from '@rollup/plugin-buble';
-import babel from '@rollup/plugin-babel';
+import commonjs from '@rollup/plugin-commonjs'
+import resolve from '@rollup/plugin-node-resolve'
+import buble from '@rollup/plugin-buble'
+import babel from '@rollup/plugin-babel'
 
-const pkg = require('./package.json');
+const pkg = require('./package.json')
 
 const externalModules = [
   'dns',
@@ -16,11 +16,12 @@ const externalModules = [
   'url',
   ...Object.keys(pkg.peerDependencies || {}),
   ...Object.keys(pkg.dependencies || {}),
-];
+]
 
-const externalPredicate = new RegExp(`^(${externalModules.join('|')})($|/)`);
-const bundlePredicate = /\/themes\//;
-const externalTest = id => externalPredicate.test(id) || bundlePredicate.test(id);
+const externalPredicate = new RegExp(`^(${externalModules.join('|')})($|/)`)
+const bundlePredicate = /\/themes\//
+const externalTest = id =>
+  externalPredicate.test(id) || bundlePredicate.test(id)
 
 const config = {
   onwarn: () => {},
@@ -48,7 +49,7 @@ const config = {
       plugins: [
         'babel-plugin-macros',
         '@babel/plugin-transform-flow-strip-types',
-        '@babel/plugin-proposal-class-properties'
+        '@babel/plugin-proposal-class-properties',
       ],
     }),
     buble({
@@ -67,37 +68,40 @@ const config = {
       presets: [],
       plugins: [
         '@babel/plugin-transform-object-assign',
-        ['@babel/plugin-transform-react-jsx', {
-          pragma: 'React.createElement',
-          pragmaFrag: 'React.Fragment',
-          useBuiltIns: true
-        }],
+        [
+          '@babel/plugin-transform-react-jsx',
+          {
+            pragma: 'React.createElement',
+            pragmaFrag: 'React.Fragment',
+            useBuiltIns: true,
+          },
+        ],
       ],
-    })
-  ]
-};
+    }),
+  ],
+}
 
-if (!fs.existsSync('themes/')) fs.mkdirSync('themes');
+if (!fs.existsSync('themes/')) fs.mkdirSync('themes')
 
 const themes = globby.sync('src/themes/*.js').map(input => {
-  const name = path.basename(input, '.js');
-  const dir = 'themes/' + name;
+  const name = path.basename(input, '.js')
+  const dir = 'themes/' + name
 
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir)
 
   const packageJson = {
-    name: '@prism-react-renderer/' + name,
+    name: '@rockchalkwushock/prism-react-renderer/' + name,
     private: true,
     sideEffects: false,
     main: 'index.cjs.js',
     module: 'index.js',
-    license: 'MIT'
-  };
+    license: 'MIT',
+  }
 
   fs.writeFileSync(
     path.join('./themes', name, 'package.json'),
     JSON.stringify(packageJson, undefined, 2)
-  );
+  )
 
   return {
     ...config,
@@ -105,15 +109,15 @@ const themes = globby.sync('src/themes/*.js').map(input => {
     output: [
       {
         file: path.join('./themes', name, 'index.cjs.js'),
-        format: 'cjs'
+        format: 'cjs',
       },
       {
         file: path.join('./themes', name, 'index.js'),
-        format: 'esm'
-      }
-    ]
-  };
-});
+        format: 'esm',
+      },
+    ],
+  }
+})
 
 export default [
   {
@@ -127,15 +131,15 @@ export default [
         dir: './',
         entryFileNames: '[name]/index.cjs.js',
         chunkFileNames: 'dist/[name]-[hash].cjs.js',
-        format: 'cjs'
+        format: 'cjs',
       },
       {
         dir: './',
         entryFileNames: '[name]/index.js',
         chunkFileNames: 'dist/[name]-[hash].js',
-        format: 'esm'
-      }
-    ]
+        format: 'esm',
+      },
+    ],
   },
-  ...themes
-];
+  ...themes,
+]
